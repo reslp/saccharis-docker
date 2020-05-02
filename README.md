@@ -6,7 +6,7 @@ This is a Docker container for the [Saccharis](https://github.com/DallasThomas/S
 ## Requirements
 
 - Docker
-- A local copy of the `cazy_extract.pl` script which contains an individual NCBI API. You can get one [here](https://www.ncbi.nlm.nih.gov/account/).
+- A local copy of the `cazy_extract.pl` script (commes with SACCHARIS) which contains an individual NCBI API. You can get one [here](https://www.ncbi.nlm.nih.gov/account/).
 
 
 ## Modifications to cazy_extract.pl
@@ -18,10 +18,11 @@ A description of what you have to do can also be found on the Saccharin Github p
 - When you run the container, bindmount the directory containing the modified `cazy_extract.pl` to your containers `/usr/local/external` directory.
 
 
-## Run the saccharin container
+## Run the saccharis container
 
 In this example the folder where this command is executed contains a folder called `bin` which contains the modified `cazy_extract.pl` file.
+The `tmp` folder is used by prottest, to save intermediate files in case they want to be kept and sinspected manually outside the container.
 
 ```
-$ docker run --rm -it -v $(pwd):/data -v $(pwd)/bin:/usr/local/external reslp/saccharis:1 Saccharis.pl -d /data -g characterized  -f GH5 -t 8
+$ docker run --rm -it -v $(pwd):/data -v $(pwd)/bin:/usr/local/external -v $(pwd)/tmp:/tmp reslp/saccharis:1 Saccharis.pl -d /data -g characterized  -f GH5 -t 8
 ```
