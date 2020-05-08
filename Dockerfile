@@ -29,7 +29,7 @@ RUN mkdir /usr/local/dbcan && \
 	
 RUN cd /usr/local/dbcan && \
 	hmmpress dbCAN-fam-HMMs.txt
-RUN apt-get install -y default-jre
+RUN apt-get install -y default-jre parallel
 
 #this is were the directory containing the custom extract_cazy.pl shall be mounted
 RUN mkdir /usr/local/external

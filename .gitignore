@@ -2,3 +2,7 @@ bin/
 GH5/
 GH55/
 tmp/
+*.fasta
+*.fa
+*.fas
+.zhistory
