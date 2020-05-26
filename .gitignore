@@ -1,8 +1,11 @@
 bin/
 GH5/
 GH55/
+AA1/
+AA11/
 tmp/
 *.fasta
 *.fa
 *.fas
 .zhistory
+cazy_list.txt

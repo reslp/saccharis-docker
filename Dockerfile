@@ -3,7 +3,7 @@ MAINTAINER <philipp.resl@uni-graz.at>
 
 RUN apt-get update && \
 	apt-get -y upgrade && \
-	apt-get install -y build-essential libwww-perl bioperl cpanminus wget fasttree raxml git hmmer
+	apt-get install -y build-essential libwww-perl bioperl cpanminus wget fasttree git hmmer
 RUN cpanm threads Bio::Seq Bio::SeqIO Date::Calc File::chdir Getopt::Long HTML::TagParser List::Util LWP::Simple Switch
 RUN cpanm URI::Fetch --force
 
@@ -31,6 +31,19 @@ RUN cd /usr/local/dbcan && \
 	hmmpress dbCAN-fam-HMMs.txt
 RUN apt-get install -y default-jre parallel
 
+RUN wget https://github.com/stamatak/standard-RAxML/archive/v8.2.12.tar.gz && \
+	tar xvfz v8.2.12.tar.gz && \
+	cd standard-RAxML-8.2.12/ && \
+ 	make -f Makefile.SSE3.PTHREADS.gcc && \
+ 	rm *.o && \
+ 	make -f Makefile.gcc && \
+ 	rm *.o && \
+	make -f Makefile.AVX.PTHREADS.gcc && \
+	rm *.o && \
+	mv raxmlHPC /usr/bin && \
+	mv raxmlHPC-PTHREADS-AVX /usr/bin && \
+	mv raxmlHPC-PTHREADS-SSE3 /usr/bin
+	
 #this is were the directory containing the custom extract_cazy.pl shall be mounted
 RUN mkdir /usr/local/external
 
