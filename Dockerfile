@@ -2,7 +2,6 @@ FROM ubuntu:18.04
 MAINTAINER <philipp.resl@uni-graz.at>
 
 RUN apt-get update && \
-	apt-get -y upgrade && \
 	apt-get install -y build-essential libwww-perl bioperl cpanminus wget fasttree git hmmer
 RUN cpanm threads Bio::Seq Bio::SeqIO Date::Calc File::chdir Getopt::Long HTML::TagParser List::Util LWP::Simple Switch
 RUN cpanm URI::Fetch --force
@@ -16,7 +15,8 @@ RUN wget https://github.com/ddarriba/prottest3/releases/download/3.4.2-release/p
 
 RUN sed -i -e '0,/bless $self, $package;/s//bless $self, ref($package) || $package;/' /usr/local/share/perl/5.26.1/HTML/TagParser.pm
 
-RUN git clone https://github.com/DallasThomas/SACCHARIS && \
+#RUN git clone https://github.com/DallasThomas/SACCHARIS && \
+RUN git clone https://github.com/reslp/SACCHARIS && \
 	cp SACCHARIS/*.pl /usr/local/bin && \
 	chmod +x /usr/local/bin/*.pl && \
 	rm /usr/local/bin/cazy_extract.pl
